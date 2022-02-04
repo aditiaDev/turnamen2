@@ -42,7 +42,7 @@
                   <input type="text" class="form-control" name="max_team" style="text-align:right" >
                 </div>
                 <div class="form-group">
-                  <label>Jml Playoff Grup</label>
+                  <label>Jml Grup Team untuk Playoff</label>
                   <input type="text" class="form-control" name="jml_team_playoff" style="text-align:right" >
                 </div>
                 <div class="form-group">

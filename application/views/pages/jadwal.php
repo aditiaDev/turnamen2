@@ -38,7 +38,8 @@
                   </div>
                   <div class="form-group">
                     <label>Jumlah Grup</label>
-                    <input type="text" class="form-control" name="jml_grup" readonly>
+                    <input type="text" class="form-control" name="jml_grup2" readonly>
+                    <input type="hidden" class="form-control" name="jml_grup" readonly>
                   </div>
                 </div>
                 <div class="card-footer">
@@ -167,6 +168,7 @@
     $("[name='jml_bye']").val(jmlBye)
     
     $("[name='jml_grup']").val(result)
+    $("[name='jml_grup2']").val(Math.ceil(result))
     $("#BTN_PROSES").attr('disabled',false)
   }
 
@@ -178,7 +180,8 @@
       data: {
         id_event: $("[name='id_event']").val(),
         jmlTeamGrup: $("[name='jml_team_grup']").val(),
-        jmlGrup: $("[name='jml_grup']").val()
+        jmlGrup: $("[name='jml_grup']").val(),
+        jmlBye: $("[name='jml_bye']").val(),
       },
       success: function(data){
         if (data.status == "success") {

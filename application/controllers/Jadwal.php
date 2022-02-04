@@ -53,11 +53,23 @@ class Jadwal extends CI_Controller {
     WHERE a.id_team=b.id_team
     AND a.id_event='".$this->input->post('id_event')."'
     AND a.status_pendaftaran='AKTIF'")->result_array();
+
+    $jmlTeam = count($team);
+    for($i=0;$i<$this->input->post('jmlBye');$i++){
+      $no = $i+$jmlTeam;
+      $team[$no]['id_team'] = 'BYE';
+      $team[$no]['nm_team'] = 'BYE';
+    }
+    
     shuffle($team);
+    
+    // echo "<pre>";
+    // print_r($team);
+    // echo "</pre>";
 
     $grup = $this->db->query("SELECT * FROM tb_grup 
               ORDER BY id_grup
-              LIMIT ".$this->input->post('jmlGrup'))->result_array();
+              LIMIT ".ceil($this->input->post('jmlGrup')))->result_array();
 
     $j = 0;
     $batas = $this->input->post('jmlTeamGrup');

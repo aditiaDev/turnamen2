@@ -64,6 +64,18 @@ class Event extends CI_Controller {
     $tgl_start = date("Y-m-d H:i:s", strtotime(substr($this->input->post('tgl_pendaftaran'),0,16)));
     $tgl_selesai = date("Y-m-d H:i:s", strtotime(substr($this->input->post('tgl_pendaftaran'),-16)));
 
+    $this->db->query("SET GLOBAL event_scheduler = ON;");
+    $this->db->query("DROP EVENT IF EXISTS ".$kode.";");
+    $createSchedule = $this->db->query("
+        CREATE EVENT IF NOT EXISTS ".$kode."
+          ON SCHEDULE AT '".$tgl_selesai."' 
+          DO 
+          BEGIN
+            UPDATE tb_event SET status='TUTUP' WHERE id_event='".$kode."';
+            DROP EVENT IF EXISTS ".$kode.";
+          END ;
+    ");
+
     $data = array(
               "id_event" => $kode,
               "nm_event" => $this->input->post('nm_event'),
